@@ -49,6 +49,11 @@ In real work scenerio, we usually use another application for task tracking and 
 - [task list link](https://www.notion.so/mengtse/aeee76b7f9fc4d53af217610231d9bec?v=aa9a7efe74a643dcbe0e000dcad9253e)
 
 
+## Time management
+| Date | time(mins) | works |
+| ---- | ---- | --- |
+| 10/17 | 60 | scope definition / documentation / init project |
+
 
 ## Thinking behind
 

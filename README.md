@@ -14,14 +14,13 @@ Make your contents safe. A secure notes editor.
 - **Markdown editor**: [react-markdown](https://github.com/remarkjs/react-markdown)
 - **UI**: [styled-components](https://styled-components.com)
 
-This project is bootstrapped with [`my-frontend-boilerplate`](https://github.com/TseHang/frontend-boilerplate).
+This project is bootstrapped with [my-frontend-boilerplate](https://github.com/TseHang/frontend-boilerplate).
 
 
 #### Some thoughts
-Here is some thoughts of my thinking process:
-1. [What is the project's scenerio in my mind?](#What-is-the-project's-scenerio-in-my-mind?)
-2. [What is my workflow?](#What-is-my-workflow?)
-3. [Why not use Redux or React local state?](#Why-not-use-Redux-or-React-local-state?)
+1. [What is the project's scenerio in my mind?](#what-is-the-projects-scenerio-in-my-mind)
+2. [What is my workflow?](#what-is-my-workflow)
+3. [Why not use Redux or React local state?](#why-not-use-redux-or-react-local-state)
 
 ## Usage
 

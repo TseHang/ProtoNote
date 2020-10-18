@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import TopBar from '@/components/TopBar';
+import { TOPBAR_HEIGHT } from '@/constants';
 
 const Container = styled.div`
   display: flex;
@@ -11,8 +12,7 @@ const Container = styled.div`
 
 const MainContainer = styled.main`
   display: flex;
-  background: gray;
-  height: 100%;
+  height: calc(100% -  ${TOPBAR_HEIGHT});
 `;
 
 const AppLayout: React.FC = ({ children }) => {

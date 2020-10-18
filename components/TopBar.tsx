@@ -2,11 +2,12 @@ import React from 'react';
 import { BiPlusMedical } from 'react-icons/bi';
 import styled from 'styled-components';
 
+import { TOPBAR_HEIGHT } from '@/constants';
+
 const Wrapper = styled.div`
   display: flex;
   align-items: center;
-  height: 20%;
-  max-height: 60px;
+  height: ${TOPBAR_HEIGHT};
   border-bottom: solid 2px;
   padding: 0 2em;
 `;

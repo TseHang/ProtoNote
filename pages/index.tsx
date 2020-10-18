@@ -1,21 +1,16 @@
-import Link from 'next/link';
 import React from 'react';
-import styled from 'styled-components';
 
+import Content from '@/components/Content';
+import NotesList from '@/components/NotesList';
+import fakeData from '@/fakeData';
 import AppLayout from '@/layouts/App';
 
-const StyledLink = styled.a`
-  color: ${p => p.theme.colors.main};
-  text-decoration: underline;
-`;
-
 const App = () => {
+  
   return (
     <AppLayout>
-      123
-      <Link href="/test">
-        <StyledLink>go test</StyledLink>
-      </Link>
+      <NotesList notes={fakeData} />
+      <Content />
     </AppLayout>
   );
 };

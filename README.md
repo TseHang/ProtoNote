@@ -62,8 +62,9 @@ In real work scenerio, we usually use another application for task tracking and 
 | Date | time(mins) | works |
 | ---- | ---- | --- |
 | 10/17 | 60 | scope definition / documentation / init project |
-| 10/17 | 55 | split small tasks / improve README |
-| 10/18 | 47 | GraphQL scheme / init |
+| 10/17 | 55 | split small tasks / [improve README](https://github.com/TseHang/PtotoNote/pull/1) |
+| 10/18 | 47 | [GraphQL scheme](https://www.notion.so/mengtse/2-GraphQL-Scheme-1b0a231b8daa47a898864dc48190447e) / [init](https://github.com/TseHang/PtotoNote/pull/2) |
+| 10/18 | 110 | [layout UI](https://github.com/TseHang/PtotoNote/pull/3) |
 
 
 ## Futhermore...

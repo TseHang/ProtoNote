@@ -63,6 +63,7 @@ In real work scenerio, we usually use another application for task tracking and 
 | ---- | ---- | --- |
 | 10/17 | 60 | scope definition / documentation / init project |
 | 10/17 | 55 | split small tasks / improve README |
+| 10/18 | 47 | GraphQL scheme / init |
 
 
 ## Futhermore...

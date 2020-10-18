@@ -20,6 +20,7 @@ const Button = styled.button`
   max-width: 250px;
   padding: 0.5em 1em;
   color: white;
+  font-size: 1.2rem;
   background: ${p => p.theme.colors.main};
   cursor: pointer;
 `;

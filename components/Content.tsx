@@ -13,11 +13,15 @@ const Wrapper = styled.div`
   flex-direction: column;
   height: 100%;
   border-left: solid 1px;
+  background: white;
 `;
 
 const Title = styled.div`
   padding: 0.5em 1em;
-  border-bottom: solid 1px;
+  border-bottom: solid 3px;
+  font-weight: bold;
+  font-size: 1.2em;
+  background: ${p => p.theme.colors.lightMain};
 `;
 
 const Content: React.FC = () => {
@@ -25,7 +29,7 @@ const Content: React.FC = () => {
   return (
     <Wrapper>
       <Title>{data.name}</Title>
-      <div style={{ flex: 1 }}>
+      <div style={{ flex: 1, padding: '.5em' }}>
         <ReactMarkdown>{data.content}</ReactMarkdown>
       </div>
       <ContentBottomBar mode={EditorMode.Edit}/>

@@ -9,7 +9,7 @@ import ContentIcon from './ContentIcon';
 const Wrapper = styled.div<{ mode: EditorMode }>`
   display: flex;
   justify-content: ${p =>p.mode === EditorMode.View ? 'flex-end' : 'space-between'};
-  border-top: solid 1px;
+  border-top: solid 3px;
   padding: 0.5em 1em;
 `;
 

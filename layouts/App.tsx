@@ -13,6 +13,7 @@ const Container = styled.div`
 const MainContainer = styled.main`
   display: flex;
   height: calc(100% -  ${TOPBAR_HEIGHT});
+  background: ${p => p.theme.colors.bg};
 `;
 
 const AppLayout: React.FC = ({ children }) => {

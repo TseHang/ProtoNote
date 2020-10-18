@@ -31,6 +31,12 @@ export const colors = {
     500: '#ffd033',
     600: '#f4b507',
   },
+  gray: {
+    100: '#EDF2F7',
+    200: '#E2E8F0',
+    500: '#718096',
+    600: '#4A5568',
+  }
 }
 
 export const theme: DefaultTheme = {
@@ -38,6 +44,8 @@ export const theme: DefaultTheme = {
 
   colors: {
     main: colors.primary[500],
+    lightMain: colors.primary[100],
     secondary: colors.secondary[500],
+    bg: colors.gray[100],
   },
 }

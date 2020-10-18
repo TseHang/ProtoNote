@@ -8,11 +8,16 @@ type Props = {
 };
 
 const Wrapper = styled.div`
+  cursor: pointer;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   font-size: .8rem;
+
+  &:hover {
+    color: ${p => p.theme.colors.main};
+  }
 `;
 
 const ContentIcon: React.FC<Props> = ({ icon, name, className }) => {

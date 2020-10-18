@@ -1,12 +1,17 @@
 import '@/styles/global.css';
 
-import App from 'next/app';
+import { AppProps } from 'next/app';
 import React from 'react';
 
-export default class MyApp extends App {
-  render() {
-    const { Component, pageProps } = this.props;
+import { useApollo } from '@/utils/apolloClient';
+import { ApolloProvider } from '@apollo/client';
 
-    return <Component {...pageProps} />;
-  }
+export default function App({ Component, pageProps }: AppProps) {
+  const apolloClient = useApollo(pageProps.initialApolloState);
+  
+  return (
+    <ApolloProvider client={apolloClient}>
+      <Component {...pageProps} />
+    </ApolloProvider>
+  );
 }

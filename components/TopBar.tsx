@@ -27,7 +27,7 @@ const Button = styled.button`
   color: white;
   font-size: 1.2rem;
   background: ${p => p.theme.colors.main};
-  cursor: ${p => (p.disabled ? 'no-drop' : 'pointer')};
+  cursor: ${p => (p.disabled ? 'not-allowed' : 'pointer')};
 `;
 
 const TopBar: React.FC = () => {

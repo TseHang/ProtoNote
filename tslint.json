@@ -17,7 +17,8 @@
     "no-submodule-imports": false, // for use alias
     "no-angle-bracket-type-assertion": false,
     "no-console": [true, "log"],
-    "jsx-no-lambda": false
+    "jsx-no-lambda": false,
+    "jsx-boolean-value": false
   },
   "rulesDirectory": []
 }

@@ -32,7 +32,7 @@ const Content: React.FC<Props> = ({ note }) => {
   const editorMode = useReactiveVar(editorModeVar);
 
   const onEdit = useCallback(() => setEditorMode(EditorMode.Edit), []);
-  const onCancel = useCallback(() => setEditorMode(EditorMode.Edit), []);
+  const onCancel = useCallback(() => setEditorMode(EditorMode.View), []);
   return (
     <Wrapper>
       <Title>{note.name}</Title>

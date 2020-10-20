@@ -3,7 +3,7 @@ import ReactMarkdown from 'react-markdown';
 import styled from 'styled-components';
 
 import { EditorMode } from '@/constants';
-import fakeData from '@/fakeData';
+import { GetNotes_notes } from '@/typings/gql';
 
 import ContentBottomBar from './ContentBottomBar';
 
@@ -24,15 +24,16 @@ const Title = styled.div`
   background: ${p => p.theme.colors.lightMain};
 `;
 
-const Content: React.FC = () => {
-  const data = fakeData[0];
+type Props = { note: GetNotes_notes };
+
+const Content: React.FC<Props> = ({ note }) => {
   return (
     <Wrapper>
-      <Title>{data.name}</Title>
+      <Title>{note.name}</Title>
       <div style={{ flex: 1, padding: '.5em' }}>
-        <ReactMarkdown>{data.content}</ReactMarkdown>
+        <ReactMarkdown>{note.content}</ReactMarkdown>
       </div>
-      <ContentBottomBar mode={EditorMode.Edit}/>
+      <ContentBottomBar mode={EditorMode.Edit} />
     </Wrapper>
   );
 };

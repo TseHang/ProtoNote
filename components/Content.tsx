@@ -3,8 +3,15 @@ import styled from 'styled-components';
 
 import { EditorMode } from '@/constants';
 import { editorModeVar, setEditorMode } from '@/gql/editorModeCache';
-import { GetNotes_notes } from '@/typings/gql';
-import { useReactiveVar } from '@apollo/client';
+import { DELETE_NOTE } from '@/gql/mutation';
+import {
+  DeleteNote,
+  DeleteNoteVariables,
+  GetNotes_notes,
+  UpdateNote,
+  UpdateNoteVariables,
+} from '@/typings/gql';
+import { useMutation, useReactiveVar } from '@apollo/client';
 
 import ContentBottomBar from './ContentBottomBar';
 import ContentView from './ContentView';
@@ -33,6 +40,33 @@ const Content: React.FC<Props> = ({ note }) => {
 
   const onEdit = useCallback(() => setEditorMode(EditorMode.Edit), []);
   const onCancel = useCallback(() => setEditorMode(EditorMode.View), []);
+
+  const [deleteNote] = useMutation<DeleteNote, DeleteNoteVariables>(
+    DELETE_NOTE,
+    {
+      variables: { id: note.id },
+      onCompleted: () => setEditorMode(EditorMode.View),
+      update: (cache, result) => {
+        if (result.data?.deleteNote) {
+          cache.modify({
+            fields: {
+              notes(existingRefs = [], { readField }) {
+                return existingRefs.filter(
+                  (ref: any) => note.id !== readField('id', ref),
+                );
+              },
+              note() {
+                return null;
+              },
+            },
+          });
+        }
+      },
+    },
+  );
+
+  // const [updateNote] = useMutation<UpdateNote, UpdateNoteVariables>(DELETE_NOTE, { variables: note.id });
+
   return (
     <Wrapper>
       <Title>{note.name}</Title>
@@ -45,7 +79,7 @@ const Content: React.FC<Props> = ({ note }) => {
         onEdit={onEdit}
         onCancel={onCancel}
         onSave={() => alert('save')}
-        onDelete={() => alert('delete')}
+        onDelete={() => deleteNote()}
       />
     </Wrapper>
   );

@@ -10,3 +10,18 @@ export const CREATE_NOTE = gql`
     }
   }
 `;
+
+export const UPDATE_NOTE = gql`
+  mutation UpdateNote($id: ID!, $content: String!) {
+    updateNote(id: $id, content: $content) {
+      id
+      content
+    }
+  }
+`;
+
+export const DELETE_NOTE = gql`
+  mutation DeleteNote($id: ID!) {
+    deleteNote(id: $id)
+  }
+`;

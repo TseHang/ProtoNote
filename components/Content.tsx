@@ -55,8 +55,8 @@ const Content: React.FC<Props> = ({ note }) => {
                   (ref: any) => note.id !== readField('id', ref),
                 );
               },
-              note() {
-                return null;
+              note(_, { DELETE }) {
+                return DELETE;
               },
             },
           });

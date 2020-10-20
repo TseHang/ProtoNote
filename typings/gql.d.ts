@@ -4,11 +4,36 @@
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL mutation operation: CreateNote
+// ====================================================
+
+export interface CreateNote_createNote {
+  __typename: 'Note';
+  id: string;
+  name: string;
+  content: string;
+  createdAt: any;
+}
+
+export interface CreateNote {
+  createNote: CreateNote_createNote;
+}
+
+export interface CreateNoteVariables {
+  name: string;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL query operation: GetNotes
 // ====================================================
 
 export interface GetNotes_notes {
-  __typename: "Note";
+  __typename: 'Note';
   id: string;
   name: string;
   content: string;
@@ -29,7 +54,7 @@ export interface GetNotes {
 // ====================================================
 
 export interface GetNote_note {
-  __typename: "Note";
+  __typename: 'Note';
   id: string;
   name: string;
   content: string;

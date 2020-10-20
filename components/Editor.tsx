@@ -9,8 +9,7 @@ const Wrapper = styled.div<{ focused: boolean }>`
   #code-editor {
     font-family: 'Fira code', 'Fira Mono', monospace;
     font-size: 16px;
-    height: 100%;
-
+    min-height: 100%;
     border-left: ${p =>
       p.focused ? `solid 2px ${p.theme.colors.main}` : 'none'};
 
@@ -20,7 +19,6 @@ const Wrapper = styled.div<{ focused: boolean }>`
   }
 
   .npm__react-simple-code-editor__textarea {
-    overflow: auto !important;
     &:focus {
       outline: none;
     }

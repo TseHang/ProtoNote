@@ -2,28 +2,26 @@ import { AppProps } from 'next/app';
 import React from 'react';
 import { ThemeProvider } from 'styled-components';
 
+import MockingWorker from '@/components/MockingWorker';
+import { isDev } from '@/constants';
 import useApollo from '@/hooks/useApollo';
-import useMockingWorker from '@/hooks/useMockingWorker';
 import GlobalStyle from '@/styles/global.ts';
 import { theme } from '@/styles/theme';
 import { ApolloProvider } from '@apollo/client';
 
 export default function App({ Component, pageProps }: AppProps) {
-  const { loading } = useMockingWorker();
   const apolloClient = useApollo(pageProps.initialApolloState);
 
-  if (loading) {
-    return <div>Loading</div>;
-  }
-
+  const Wrapper = isDev ? MockingWorker : React.Fragment;
+  
   return (
-    <>
+    <Wrapper>
       <GlobalStyle />
       <ApolloProvider client={apolloClient}>
         <ThemeProvider theme={theme}>
           <Component {...pageProps} />
         </ThemeProvider>
       </ApolloProvider>
-    </>
+    </Wrapper>
   );
 }

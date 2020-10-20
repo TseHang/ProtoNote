@@ -3,21 +3,22 @@
 > **DEMO PROJECT! ([spec](https://gist.github.com/mmso/9097e36918084fa8ab3b0bb823327201))**
 
 Make your contents safe. A secure notes editor.
+
 - support markdown.
 - support dark mode.
 
-
 #### Technology stack
+
 - **Framework**: [React.js](https://reactjs.org) for build UI, and [Next.js](https://nextjs.org) for production.
-- **State control**: [Apollo Client](https://www.apollographql.com/docs/react/)  with [GraphQL](https://graphql.org) for local state and api mocking.
+- **State control**: [Apollo Client](https://www.apollographql.com/docs/react/) with [GraphQL](https://graphql.org) for local state and api mocking.
 - **Typescript**: for better developer experience.
 - **Markdown editor**: [react-markdown](https://github.com/remarkjs/react-markdown)
 - **UI**: [styled-components](https://styled-components.com)
 
 This project is bootstrapped with [my-frontend-boilerplate](https://github.com/TseHang/frontend-boilerplate).
 
-
 #### Some thoughts
+
 1. [What is the project's scenerio in my mind?](#what-is-the-projects-scenerio-in-my-mind)
 2. [What is my workflow?](#what-is-my-workflow)
 3. [Why not use Redux or React local state?](#why-not-use-redux-or-react-local-state)
@@ -33,22 +34,22 @@ yarn dev # run the development server
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-
 #### Other commands
 
 Build:
+
 ```bash
 yarn build
 ```
 
 Run production:
+
 ```bash
 yarn start
 ```
 
-
-
 ## Schedule & Task list
+
 In real work scenerio, we usually use another application for task tracking and management. I use [Notion](https://www.notion.so/product) for task management here.
 
 **[Here is my task list link](https://www.notion.so/mengtse/aeee76b7f9fc4d53af217610231d9bec?v=aa9a7efe74a643dcbe0e000dcad9253e), you can see how I split into small tasks and how I manage them.**
@@ -56,40 +57,45 @@ In real work scenerio, we usually use another application for task tracking and 
 ![preview](./resources/taskList.png)
 (Add number at the beginning of name is for sorting and sequence. Usually we sort by due date or priority.)
 
-
-
 ## Time management
-| Date | time(mins) | works |
-| ---- | ---- | --- |
-| 10/17 | 60 | scope definition / documentation / init project |
-| 10/17 | 55 | split small tasks / [improve README](https://github.com/TseHang/PtotoNote/pull/1) |
-| 10/18 | 47 | [GraphQL scheme](https://www.notion.so/mengtse/2-GraphQL-Scheme-1b0a231b8daa47a898864dc48190447e) / [init](https://github.com/TseHang/PtotoNote/pull/2) |
-| 10/18 | 110 | [layout UI](https://github.com/TseHang/PtotoNote/pull/3) |
 
+| Date  | time(mins) | works                                                                                                                                                   |
+| ----- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 10/17 | 60         | scope definition / documentation / init project                                                                                                         |
+| 10/17 | 55         | split small tasks / [improve README](https://github.com/TseHang/PtotoNote/pull/1)                                                                       |
+| 10/18 | 47         | [GraphQL scheme](https://www.notion.so/mengtse/2-GraphQL-Scheme-1b0a231b8daa47a898864dc48190447e) / [init](https://github.com/TseHang/PtotoNote/pull/2) |
+| 10/18 | 110        | [layout UI](https://github.com/TseHang/PtotoNote/pull/3)                                                                                                |
+| 10/20 | 90         | [api mocking](https://github.com/TseHang/PtotoNote/pull/4)                                                                                              |
+| 10/20 | 120        | [view mode](https://github.com/TseHang/PtotoNote/pull/5)                                                                                                |
 
 ## Futhermore...
 
 #### What is the project's scenerio in my mind?
+
 In my imagination, the project is a real task assigned to a team on REAL WORK.
 
 Therefore, if I am the project leader, the workflow should not be coding first, but starting from scoping definition, then writing documentation, then discussing GraphQL schema with frontend/backend, and finally coding.
 
 Here is the flow:
+
 1. scope definition
 2. documentation
 3. split to small tasks
-3. discuss GraphQL scheme
-4. coding
-5. debug & test(If I have time.)
-6. deploy
+4. discuss GraphQL scheme
+5. coding
+6. debug & test(If I have time.)
+7. deploy
 
 Here is the scope definition of this project:
+
 1. Technology: React / Typescript / GraphQL
 2. Complete the [specification](https://gist.github.com/mmso/9097e36918084fa8ab3b0bb823327201), and I want to add a funny feature, dark mode
 3. We have backend, so maybe we need api mocking if backend is not ready.
 
 #### What is my workflow?
+
 In this project, I plan to do:
+
 1. Write scope definition, some thoughts and thinking process in README.
 2. Using Notion for [tasks management](https://www.notion.so/mengtse/aeee76b7f9fc4d53af217610231d9bec?v=aa9a7efe74a643dcbe0e000dcad9253e), and recording problems I encountered and solution I found in each task.
 3. Imaging backend exists, writing GraphQL scheme.
@@ -107,8 +113,8 @@ In negotiation, if it is about whole project, which can be discussed in our team
 
 In development, open Pull Request for each task or task's sub task. Must one of reviewers approved and CI test success, the PR can be merged into master.
 
-
 #### Why not use Redux or React local state?
+
 **For demo, I think React state and context is enough and suitable for small project.**
 
 However if the project is a real task on work, I will choose to use Redux or Apollo Client. Redux is a good state management library for complex application, and so does Apollo Client. The difference is Apollo Client enables you to manage both local and remote data with GraphQL.

@@ -2,6 +2,8 @@ import Link from 'next/link';
 import React from 'react';
 import styled from 'styled-components';
 
+import { EditorMode } from '@/constants';
+import { setEditorMode } from '@/gql/editorModeCache';
 import { GetNotes_notes } from '@/typings/gql';
 
 const ItemWrapper = styled.a`
@@ -35,7 +37,7 @@ const NotesList: React.FC<Props> = ({ notes }) => {
     <div style={{ flex: 1, overflow: 'scroll' }}>
       {notes.map(note => (
         <Link key={note.id} href={`/?noteId=${note.id}`}>
-          <ItemWrapper>
+          <ItemWrapper onClick={() => setEditorMode(EditorMode.View)}>
             <p>{note.name}</p>
           </ItemWrapper>
         </Link>

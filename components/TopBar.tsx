@@ -2,11 +2,12 @@ import React from 'react';
 import { BiPlusMedical } from 'react-icons/bi';
 import styled from 'styled-components';
 
-import { TOPBAR_HEIGHT } from '@/constants';
+import { EditorMode, TOPBAR_HEIGHT } from '@/constants';
+import { editorModeVar } from '@/gql/editorModeCache';
 import { CREATE_NOTE } from '@/gql/mutation';
 import { GET_NOTES } from '@/gql/queries';
 import { CreateNote, CreateNoteVariables } from '@/typings/gql';
-import { useMutation } from '@apollo/client';
+import { useMutation, useReactiveVar } from '@apollo/client';
 
 const Wrapper = styled.div`
   display: flex;
@@ -26,10 +27,11 @@ const Button = styled.button`
   color: white;
   font-size: 1.2rem;
   background: ${p => p.theme.colors.main};
-  cursor: pointer;
+  cursor: ${p => (p.disabled ? 'no-drop' : 'pointer')};
 `;
 
 const TopBar: React.FC = () => {
+  const editorMode = useReactiveVar(editorModeVar);
   const [createNote] = useMutation<CreateNote, CreateNoteVariables>(
     CREATE_NOTE,
     {
@@ -39,7 +41,10 @@ const TopBar: React.FC = () => {
   );
   return (
     <Wrapper>
-      <Button onClick={() => createNote()}>
+      <Button
+        onClick={() => createNote()}
+        disabled={editorMode === EditorMode.Edit}
+      >
         <BiPlusMedical size="20px" style={{ marginRight: '10px' }} />
         New note
       </Button>

@@ -1,0 +1,22 @@
+"""
+The javascript `Date` as integer. Type represents date and time as number of milliseconds from start of UNIX epoch.
+"""
+scalar Timestamp
+
+type Note {
+	id: ID!
+	name: String!
+	content: String!
+	createdAt: Timestamp!
+}
+
+type Query {
+	notes: [Note!]!
+	note(id: ID!): Note
+}
+
+type Mutation {
+	createNote(name: String!): Note!
+	updateNote(id: ID!, content: String!): Note!
+	deleteNote(id: ID!): Boolean!
+}

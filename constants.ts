@@ -4,3 +4,10 @@ export enum EditorMode {
   Edit = 'EDIT',
   View = 'VIEW',
 }
+
+export const isServer = typeof window === 'undefined';
+
+export enum ColorMode {
+  Light = 'light',
+  Dark = 'dark',
+}

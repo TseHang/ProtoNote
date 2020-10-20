@@ -1,43 +1,16 @@
-import { useMemo } from 'react';
+import { isServer } from '@/constants';
+import { ApolloClient, HttpLink, InMemoryCache } from '@apollo/client';
 
-import { ApolloClient, InMemoryCache } from '@apollo/client';
-
-let apolloClient: ApolloClient<any>;
-
-const isServer = typeof window === 'undefined';
-
-function createApolloClient() {
+export function createApolloClient() {
   return new ApolloClient({
     ssrMode: isServer,
     cache: new InMemoryCache(),
+    link: new HttpLink({
+      uri: 'http://localhost:3000/graphql',
+      // Use explicit `window.fetch` so tha outgoing requests
+      // are captured and deferred until the Service Worker is ready.
+      // @ts-ignore
+      fetch: (...args) => fetch(...args),
+    })
   });
-}
-
-export function initializeApollo(initialState?: any) {
-  const _apolloClient = apolloClient ?? createApolloClient();
-
-  // If your page has Next.js data fetching methods that use Apollo Client, the initial state
-  // gets hydrated here
-  if (initialState) {
-    // Get existing cache, loaded during client side data fetching
-    const existingCache = _apolloClient.extract();
-    // Restore the cache using the data passed from getStaticProps/getServerSideProps
-    // combined with the existing cached data
-    _apolloClient.cache.restore({ ...existingCache, ...initialState });
-  }
-  // For SSG and SSR always create a new Apollo Client
-  if (isServer) {
-    return _apolloClient;
-  }
-  // Create the Apollo Client once in the client
-  if (!apolloClient) {
-    apolloClient = _apolloClient;
-  }
-
-  return _apolloClient;
-}
-
-export function useApollo(initialState?: any) {
-  const store = useMemo(() => initializeApollo(initialState), [initialState]);
-  return store;
 }

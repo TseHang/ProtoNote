@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import { GetNotes_notes } from '@/typings/gql';
+
 const ItemWrapper = styled.div`
   display: flex;
   margin: .5rem 1rem;
@@ -24,7 +26,7 @@ const ItemWrapper = styled.div`
 `;
 
 type Props = {
-  notes: any[];
+  notes: GetNotes_notes[];
 }
 
 const NotesList: React.FC<Props> = ({ notes }) => {

@@ -28,8 +28,8 @@ const Button = styled.button`
 const TopBar: React.FC = () => {
   return (
     <Wrapper>
-      <Button>
-        <BiPlusMedical size="20px" style={{ marginRight: '10px' }}/>
+      <Button onClick={() => alert('create')}>
+        <BiPlusMedical size="20px" style={{ marginRight: '10px' }} />
         New note
       </Button>
     </Wrapper>

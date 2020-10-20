@@ -28,6 +28,7 @@ const Title = styled.div`
 type Props = { note: GetNotes_notes };
 
 const Content: React.FC<Props> = ({ note }) => {
+  const [mode, setMode] = useState<EditorMode>(EditorMode.View);
   const [clearContent, setClearContent] = useState<string | null>(null);
 
   useEffect(() => {
@@ -48,7 +49,13 @@ const Content: React.FC<Props> = ({ note }) => {
           <div>Loading...</div>
         )}
       </div>
-      <ContentBottomBar mode={EditorMode.View} />
+      <ContentBottomBar
+        mode={mode}
+        onEdit={() => setMode(EditorMode.Edit)}
+        onCancel={() => setMode(EditorMode.View)}
+        onSave={() => alert('save')}
+        onDelete={() => alert('delete')}
+      />
     </Wrapper>
   );
 };

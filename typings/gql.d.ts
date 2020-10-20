@@ -24,6 +24,31 @@ export interface GetNotes {
 // @generated
 // This file was automatically generated and should not be edited.
 
+// ====================================================
+// GraphQL query operation: GetNote
+// ====================================================
+
+export interface GetNote_note {
+  __typename: "Note";
+  id: string;
+  name: string;
+  content: string;
+  createdAt: any;
+}
+
+export interface GetNote {
+  note: GetNote_note | null;
+}
+
+export interface GetNoteVariables {
+  id: string;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
 //==============================================================
 // START Enums and Input Objects
 //==============================================================

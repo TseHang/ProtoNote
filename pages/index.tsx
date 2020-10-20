@@ -8,20 +8,23 @@ import AppLayout from '@/layouts/App';
 import { GetNote, GetNoteVariables, GetNotes } from '@/typings/gql';
 import { useQuery } from '@apollo/client';
 
-const App = () => {  
+const App = () => {
   const parsed = queryString.parse(location.search);
   const noteId = parsed.noteId as string;
-  
-  const { data: notesDate } = useQuery<GetNotes>(GET_NOTES);
-  const { data: noteDate } = useQuery<GetNote, GetNoteVariables>(GET_NOTE, {
+
+  const { data: notesData } = useQuery<GetNotes>(GET_NOTES);
+  const { data: noteData } = useQuery<GetNote, GetNoteVariables>(GET_NOTE, {
     variables: { id: noteId },
     skip: !noteId,
   });
 
   return (
     <AppLayout>
-      <NotesList notes={notesDate?.notes || []} />
-      {noteDate?.note && <Content note={noteDate.note} />}
+      <NotesList notes={notesData?.notes || []} />
+      {noteData?.note && noteId && (
+        // key for telling React need to re-render when noteId changed
+        <Content key={noteId} note={noteData.note} />
+      )}
     </AppLayout>
   );
 };

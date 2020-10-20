@@ -7,6 +7,8 @@ import { GetNotes_notes } from '@/typings/gql';
 import { decrypt } from '@/utils/security';
 
 import ContentBottomBar from './ContentBottomBar';
+import ContentView from './ContentView';
+import Editor from './Editor';
 
 const Wrapper = styled.div`
   width: 50%;
@@ -29,25 +31,12 @@ type Props = { note: GetNotes_notes };
 
 const Content: React.FC<Props> = ({ note }) => {
   const [mode, setMode] = useState<EditorMode>(EditorMode.View);
-  const [clearContent, setClearContent] = useState<string | null>(null);
-
-  useEffect(() => {
-    async function decryptContent() {
-      setClearContent(null);
-      setClearContent(await decrypt(note.content));
-    }
-    decryptContent();
-  }, [note]);
 
   return (
     <Wrapper>
       <Title>{note.name}</Title>
-      <div style={{ flex: 1, padding: '.5em' }}>
-        {clearContent ? (
-          <ReactMarkdown>{clearContent}</ReactMarkdown>
-        ) : (
-          <div>Loading...</div>
-        )}
+      <div style={{ flex: 1, padding: '.5em', overflowY: 'scroll' }}>
+        <ContentView content={note.content} mode={mode} />
       </div>
       <ContentBottomBar
         mode={mode}

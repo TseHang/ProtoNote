@@ -3,6 +3,10 @@ import { BiPlusMedical } from 'react-icons/bi';
 import styled from 'styled-components';
 
 import { TOPBAR_HEIGHT } from '@/constants';
+import { CREATE_NOTE } from '@/gql/mutation';
+import { GET_NOTES } from '@/gql/queries';
+import { CreateNote, CreateNoteVariables } from '@/typings/gql';
+import { useMutation } from '@apollo/client';
 
 const Wrapper = styled.div`
   display: flex;
@@ -26,9 +30,16 @@ const Button = styled.button`
 `;
 
 const TopBar: React.FC = () => {
+  const [createNote] = useMutation<CreateNote, CreateNoteVariables>(
+    CREATE_NOTE,
+    {
+      variables: { name: 'NEW NOTE!!!' },
+      refetchQueries: [{ query: GET_NOTES }],
+    },
+  );
   return (
     <Wrapper>
-      <Button onClick={() => alert('create')}>
+      <Button onClick={() => createNote()}>
         <BiPlusMedical size="20px" style={{ marginRight: '10px' }} />
         New note
       </Button>

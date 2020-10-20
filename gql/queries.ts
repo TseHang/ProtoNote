@@ -10,3 +10,15 @@ export const GET_NOTES = gql`
     }
   }
 `;
+
+
+export const GET_NOTE = gql`
+  query GetNote($id: ID!) {
+    note(id: $id) {
+      id
+      name
+      content
+      createdAt
+    }
+  }
+`;

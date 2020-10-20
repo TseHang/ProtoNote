@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import styled from 'styled-components';
 
 import { EditorMode } from '@/constants';
 import { GetNotes_notes } from '@/typings/gql';
+import { decrypt } from '@/utils/security';
 
 import ContentBottomBar from './ContentBottomBar';
+import ContentView from './ContentView';
+import Editor from './Editor';
 
 const Wrapper = styled.div`
   width: 50%;
@@ -27,13 +30,21 @@ const Title = styled.div`
 type Props = { note: GetNotes_notes };
 
 const Content: React.FC<Props> = ({ note }) => {
+  const [mode, setMode] = useState<EditorMode>(EditorMode.View);
+
   return (
     <Wrapper>
       <Title>{note.name}</Title>
-      <div style={{ flex: 1, padding: '.5em' }}>
-        <ReactMarkdown>{note.content}</ReactMarkdown>
+      <div style={{ flex: 1, padding: '.5em', overflowY: 'scroll' }}>
+        <ContentView content={note.content} mode={mode} />
       </div>
-      <ContentBottomBar mode={EditorMode.Edit} />
+      <ContentBottomBar
+        mode={mode}
+        onEdit={() => setMode(EditorMode.Edit)}
+        onCancel={() => setMode(EditorMode.View)}
+        onSave={() => alert('save')}
+        onDelete={() => alert('delete')}
+      />
     </Wrapper>
   );
 };

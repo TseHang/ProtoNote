@@ -1,19 +1,20 @@
+import Link from 'next/link';
 import React from 'react';
 import styled from 'styled-components';
 
 import { GetNotes_notes } from '@/typings/gql';
 
-const ItemWrapper = styled.div`
+const ItemWrapper = styled.a`
   display: flex;
-  margin: .5rem 1rem;
-  padding: .5rem 1rem;
+  margin: 0.5rem 1rem;
+  padding: 0.5rem 1rem;
   background: white;
   height: 50px;
   align-items: center;
 
   &:hover {
     cursor: pointer;
-    background-color: ${p => p.theme.colors.lightMain}
+    background-color: ${p => p.theme.colors.lightMain};
   }
 
   &:first-child {
@@ -27,13 +28,17 @@ const ItemWrapper = styled.div`
 
 type Props = {
   notes: GetNotes_notes[];
-}
+};
 
 const NotesList: React.FC<Props> = ({ notes }) => {
   return (
     <div style={{ flex: 1, overflow: 'scroll' }}>
-      {notes.map(d => (
-        <ItemWrapper key={d.id} ><p>{d.name}</p></ItemWrapper>
+      {notes.map(note => (
+        <Link key={note.id} href={`/?noteId=${note.id}`}>
+          <ItemWrapper>
+            <p>{note.name}</p>
+          </ItemWrapper>
+        </Link>
       ))}
     </div>
   );

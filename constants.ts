@@ -7,6 +7,8 @@ export enum EditorMode {
 
 export const isServer = typeof window === 'undefined';
 
+export const isDev = process.env.NODE_ENV === 'development';
+
 export enum ColorMode {
   Light = 'light',
   Dark = 'dark',

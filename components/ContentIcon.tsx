@@ -5,6 +5,7 @@ type Props = {
   icon: ReactElement;
   name: string;
   className?: string;
+  onClick?: (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
 };
 
 const Wrapper = styled.div`
@@ -20,9 +21,9 @@ const Wrapper = styled.div`
   }
 `;
 
-const ContentIcon: React.FC<Props> = ({ icon, name, className }) => {
+const ContentIcon: React.FC<Props> = ({ icon, name, className, onClick }) => {
   return (
-    <Wrapper className={className}>
+    <Wrapper className={className} onClick={onClick}>
       {icon}
       <span>{name}</span>
     </Wrapper>

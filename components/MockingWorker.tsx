@@ -1,4 +1,3 @@
-import { SetupWorkerApi } from 'msw/lib/types/setupWorker/setupWorker';
 import React, { useEffect, useState } from 'react';
 
 const MockingWorkerProvider: React.FC = ({ children }) => {
@@ -14,7 +13,7 @@ const MockingWorkerProvider: React.FC = ({ children }) => {
   }, []);
 
   if (loading) {
-    return <div>Loading</div>;
+    return <div>Loading...</div>;
   }
 
   return <>{children}</>;

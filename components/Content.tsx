@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import styled from 'styled-components';
 
 import { EditorMode } from '@/constants';
 import { GetNotes_notes } from '@/typings/gql';
+import { decrypt } from '@/utils/security';
 
 import ContentBottomBar from './ContentBottomBar';
 
@@ -27,13 +28,27 @@ const Title = styled.div`
 type Props = { note: GetNotes_notes };
 
 const Content: React.FC<Props> = ({ note }) => {
+  const [clearContent, setClearContent] = useState<string | null>(null);
+
+  useEffect(() => {
+    async function decryptContent() {
+      setClearContent(null);
+      setClearContent(await decrypt(note.content));
+    }
+    decryptContent();
+  }, [note]);
+
   return (
     <Wrapper>
       <Title>{note.name}</Title>
       <div style={{ flex: 1, padding: '.5em' }}>
-        <ReactMarkdown>{note.content}</ReactMarkdown>
+        {clearContent ? (
+          <ReactMarkdown>{clearContent}</ReactMarkdown>
+        ) : (
+          <div>Loading...</div>
+        )}
       </div>
-      <ContentBottomBar mode={EditorMode.Edit} />
+      <ContentBottomBar mode={EditorMode.View} />
     </Wrapper>
   );
 };

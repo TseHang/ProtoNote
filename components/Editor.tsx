@@ -25,10 +25,9 @@ const Wrapper = styled.div<{ focused: boolean }>`
   }
 `;
 
-type Props = { content: string };
+type Props = { content: string; onChangeContent: (content: string) => void };
 
-const Editor: React.FC<Props> = ({ content }) => {
-  const [value, setValue] = useState(content);
+const Editor: React.FC<Props> = ({ content, onChangeContent }) => {
   const [focused, setFocused] = useState<boolean>(false);
 
   useEffect(() => {
@@ -41,8 +40,8 @@ const Editor: React.FC<Props> = ({ content }) => {
         id="code-editor"
         onFocus={() => setFocused(true)}
         onBlur={() => setFocused(false)}
-        value={value}
-        onValueChange={c => setValue(c)}
+        value={content}
+        onValueChange={onChangeContent}
         highlight={c =>
           Prism.highlight(c, Prism.languages.markdown, 'markdown')
         }

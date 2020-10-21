@@ -3,6 +3,8 @@ import { BiEditAlt, BiSave, BiTrash, BiX } from 'react-icons/bi';
 import styled from 'styled-components';
 
 import { EditorMode } from '@/constants';
+import { editorModeVar } from '@/gql/editorModeCache';
+import { useReactiveVar } from '@apollo/client';
 
 import ContentIcon from './ContentIcon';
 
@@ -20,7 +22,6 @@ const SaveIcon = styled(ContentIcon)`
 `;
 
 type Props = {
-  mode: EditorMode;
   onEdit: () => void;
   onSave: () => void;
   onCancel: () => void;
@@ -28,15 +29,15 @@ type Props = {
 };
 
 const ContentBottomBar: React.FC<Props> = ({
-  mode,
   onDelete,
   onSave,
   onEdit,
   onCancel,
 }) => {
+  const editorMode = useReactiveVar(editorModeVar);
   return (
-    <Wrapper mode={mode}>
-      {mode === EditorMode.View ? (
+    <Wrapper mode={editorMode}>
+      {editorMode === EditorMode.View ? (
         <ContentIcon
           icon={<BiEditAlt size="30px" />}
           name="Edit"
@@ -65,4 +66,4 @@ const ContentBottomBar: React.FC<Props> = ({
   );
 };
 
-export default ContentBottomBar;
+export default React.memo(ContentBottomBar);

@@ -21,7 +21,10 @@ const App = () => {
   return (
     <AppLayout>
       <NotesList notes={notesData?.notes || []} />
-      {noteData?.note && noteId && <Content note={noteData.note} />}
+      {noteData?.note && noteId && (
+        /* key for re-render when noteId changed */
+        <Content key={noteId} note={noteData.note} />
+      )}
     </AppLayout>
   );
 };

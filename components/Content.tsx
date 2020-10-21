@@ -1,9 +1,9 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import { EditorMode } from '@/constants';
-import { editorModeVar, setEditorMode } from '@/gql/editorModeCache';
-import { DELETE_NOTE } from '@/gql/mutation';
+import { setEditorMode } from '@/gql/editorModeCache';
+import { DELETE_NOTE, UPDATE_NOTE } from '@/gql/mutation';
 import {
   DeleteNote,
   DeleteNoteVariables,
@@ -11,8 +11,10 @@ import {
   UpdateNote,
   UpdateNoteVariables,
 } from '@/typings/gql';
-import { useMutation, useReactiveVar } from '@apollo/client';
+import { decrypt, encrypt } from '@/utils/security';
+import { useMutation } from '@apollo/client';
 
+import ContentTopBar from './ContantTopBar';
 import ContentBottomBar from './ContentBottomBar';
 import ContentView from './ContentView';
 
@@ -25,18 +27,19 @@ const Wrapper = styled.div`
   background: white;
 `;
 
-const Title = styled.div`
-  padding: 0.5em 1em;
-  border-bottom: solid 3px;
-  font-weight: bold;
-  font-size: 1.2em;
-  background: ${p => p.theme.colors.lightMain};
-`;
-
 type Props = { note: GetNotes_notes };
 
 const Content: React.FC<Props> = ({ note }) => {
-  const editorMode = useReactiveVar(editorModeVar);
+  const [clearContent, setClearContent] = useState<string | null>(null);
+  const [isEncrypting, setIsEncrypting] = useState<boolean>(false);
+
+  // decrypt dirty content
+  useEffect(() => {
+    async function decryptContent() {
+      setClearContent(await decrypt(note.content));
+    }
+    decryptContent();
+  }, [note.content]);
 
   const onEdit = useCallback(() => setEditorMode(EditorMode.Edit), []);
   const onCancel = useCallback(() => setEditorMode(EditorMode.View), []);
@@ -65,21 +68,40 @@ const Content: React.FC<Props> = ({ note }) => {
     },
   );
 
-  // const [updateNote] = useMutation<UpdateNote, UpdateNoteVariables>(DELETE_NOTE, { variables: note.id });
+  const [updateNote, { loading }] = useMutation<
+    UpdateNote,
+    UpdateNoteVariables
+  >(UPDATE_NOTE, {
+    onCompleted: () => setEditorMode(EditorMode.View),
+  });
+
+  const onSave = useCallback(async () => {
+    if (clearContent !== null) {
+      // encrypt clear data to dirty format
+      setIsEncrypting(true);
+      const encryptedContent = await encrypt(clearContent);
+      updateNote({
+        variables: { id: note.id, content: encryptedContent },
+      });
+      setIsEncrypting(false);
+    }
+  }, [updateNote, clearContent]);
 
   return (
     <Wrapper>
-      <Title>{note.name}</Title>
+      <ContentTopBar name={note.name} />
       <div style={{ flex: 1, padding: '.5em', overflowY: 'scroll' }}>
-        {/* key for re-render when noteId changed */}
-        <ContentView key={note.id} content={note.content} mode={editorMode} />
+        <ContentView
+          content={clearContent}
+          onChangeContent={setClearContent}
+          isLoading={loading || isEncrypting}
+        />
       </div>
       <ContentBottomBar
-        mode={editorMode}
         onEdit={onEdit}
         onCancel={onCancel}
-        onSave={() => alert('save')}
-        onDelete={() => deleteNote()}
+        onSave={onSave}
+        onDelete={deleteNote}
       />
     </Wrapper>
   );

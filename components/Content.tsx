@@ -48,7 +48,6 @@ const Content: React.FC<Props> = ({ note }) => {
     DELETE_NOTE,
     {
       variables: { id: note.id },
-      onCompleted: () => setEditorMode(EditorMode.View),
       update: (cache, result) => {
         if (result.data?.deleteNote) {
           cache.modify({
@@ -71,9 +70,7 @@ const Content: React.FC<Props> = ({ note }) => {
   const [updateNote, { loading }] = useMutation<
     UpdateNote,
     UpdateNoteVariables
-  >(UPDATE_NOTE, {
-    onCompleted: () => setEditorMode(EditorMode.View),
-  });
+  >(UPDATE_NOTE);
 
   const onSave = useCallback(async () => {
     if (clearContent !== null) {

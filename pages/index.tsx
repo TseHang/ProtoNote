@@ -1,8 +1,10 @@
 import queryString from 'query-string';
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import Content from '@/components/Content';
 import NotesList from '@/components/NotesList';
+import { EditorMode } from '@/constants';
+import { setEditorMode } from '@/gql/editorModeCache';
 import { GET_NOTE, GET_NOTES } from '@/gql/queries';
 import AppLayout from '@/layouts/App';
 import { GetNote, GetNoteVariables, GetNotes } from '@/typings/gql';
@@ -17,6 +19,11 @@ const App = () => {
     variables: { id: noteId },
     skip: !noteId,
   });
+
+  // if noteData changed, alway back to View mode first.
+  useEffect(() => {
+    setEditorMode(EditorMode.View);
+  }, [noteData?.note]);
 
   return (
     <AppLayout>

@@ -107,7 +107,8 @@ const Content: React.FC<Props> = ({ note }) => {
         <ContentView
           content={editingContent}
           onChangeContent={setEditingContent}
-          isLoading={loading || isEncrypting}
+          isLoading={clearContent === null}
+          isSaving={loading || isEncrypting}
         />
       </div>
       <ContentBottomBar

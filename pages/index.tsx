@@ -29,7 +29,7 @@ const App = () => {
     <AppLayout>
       <NotesList notes={notesData?.notes || []} />
       {noteData?.note && noteId && (
-        /* key for re-render when noteId changed */
+        /* key for re-mount when noteId changed */
         <Content key={noteId} note={noteData.note} />
       )}
     </AppLayout>

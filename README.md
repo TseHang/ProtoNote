@@ -59,15 +59,16 @@ In real work scenerio, we usually use another application for task tracking and 
 
 ## Time management
 
-| Date  | time(mins) | works                                                                                                                                                   |
-| ----- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 10/17 | 60         | scope definition / documentation / init project                                                                                                         |
-| 10/17 | 55         | split small tasks / [improve README](https://github.com/TseHang/PtotoNote/pull/1)                                                                       |
-| 10/18 | 47         | [GraphQL scheme](https://www.notion.so/mengtse/2-GraphQL-Scheme-1b0a231b8daa47a898864dc48190447e) / [init](https://github.com/TseHang/PtotoNote/pull/2) |
-| 10/18 | 110        | [layout UI](https://github.com/TseHang/PtotoNote/pull/3)                                                                                                |
-| 10/20 | 90         | [api mocking](https://github.com/TseHang/PtotoNote/pull/4)                                                                                              |
-| 10/20 | 120        | [view mode](https://github.com/TseHang/PtotoNote/pull/5)                                                                                                |
-| 10/21 | 100        | [edit mode](https://github.com/TseHang/PtotoNote/pull/6)                                                                                                |
+| Date  | time(mins) | works                                                                                                                                                                                                                   |
+| ----- | ---------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 10/17 | 60         | scope definition / documentation / init project                                                                                                                                                                         |
+| 10/17 | 55         | split small tasks / [improve README](https://github.com/TseHang/PtotoNote/pull/1)                                                                                                                                       |
+| 10/18 | 47         | [GraphQL scheme](https://www.notion.so/mengtse/2-GraphQL-Scheme-1b0a231b8daa47a898864dc48190447e) / [init](https://github.com/TseHang/PtotoNote/pull/2)                                                                 |
+| 10/18 | 110        | [layout UI](https://github.com/TseHang/PtotoNote/pull/3)                                                                                                                                                                |
+| 10/20 | 90         | [api mocking](https://github.com/TseHang/PtotoNote/pull/4)                                                                                                                                                              |
+| 10/20 | 120        | [view mode](https://github.com/TseHang/PtotoNote/pull/5)                                                                                                                                                                |
+| 10/21 | 100        | [edit mode](https://github.com/TseHang/PtotoNote/pull/6)                                                                                                                                                                |
+| 10/21 | 90         | [deploy](https://github.com/TseHang/PtotoNote/commit/5f08d54e81f19c70c8c595267f64e8edc2e5efb0) / [Dark mode](https://github.com/TseHang/PtotoNote/pull/10) / [Simple RWD](https://github.com/TseHang/PtotoNote/pull/11) |
 
 ## Futhermore...
 

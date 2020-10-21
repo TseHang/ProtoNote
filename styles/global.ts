@@ -31,6 +31,7 @@ export default createGlobalStyle<{ colorMode: ColorMode }>`
   input, button {
     outline: none;
     border: none;
+    background: none;
 
     &:focus {
       outline: none;

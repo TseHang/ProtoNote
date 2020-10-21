@@ -98,7 +98,7 @@ const Content: React.FC<Props> = ({ note }) => {
         />
       </div>
       <ContentBottomBar
-        isLoading={!clearContent || loading || isEncrypting}
+        isLoading={clearContent === null || loading || isEncrypting}
         onEdit={onEdit}
         onCancel={onCancel}
         onSave={onSave}

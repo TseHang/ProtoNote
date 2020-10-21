@@ -20,7 +20,7 @@ export const handlers = [
       __typename: 'Note',
       id: uuidv4(),
       name,
-      content: 'encrypt:# Hello, *new world*!',
+      content: 'encrypt:',
       createdAt: new Date().getTime(),
     };
     notes.push(newNote);

@@ -20,7 +20,7 @@ const ContentView: React.FC<Props> = ({
 }) => {
   const editorMode = useReactiveVar(editorModeVar);
 
-  if (!content) {
+  if (content === null) {
     return <div>Loading content...</div>;
   }
 
@@ -29,7 +29,9 @@ const ContentView: React.FC<Props> = ({
   }
 
   return editorMode === EditorMode.View ? (
-    <ReactMarkdown>{content}</ReactMarkdown>
+    <ReactMarkdown>
+      {content === '' ? '*<empty content...>*' : content}
+    </ReactMarkdown>
   ) : (
     <Editor content={content} onChangeContent={onChangeContent} />
   );

@@ -22,6 +22,10 @@ This project is bootstrapped with [my-frontend-boilerplate](https://github.com/T
 1. [What is the project's scenerio in my mind?](#what-is-the-projects-scenerio-in-my-mind)
 2. [What is my workflow?](#what-is-my-workflow)
 3. [Why not use Redux or React local state?](#why-not-use-redux-or-react-local-state)
+4. [Why use Api mocking?](#why-use-api-mocking)
+5. [Something about new Apollo v3 api Reactive variables](#something-about-new-apollo-v3-api-reactive-variables)
+6. [Something about flash screen issue?](#something-about-flash-screen-issue)
+7. [Conclusion: after finishing all tasks](#conclusion-after-finishing-all-tasks)
 
 ## Usage
 
@@ -117,10 +121,65 @@ In development, open Pull Request for each task or task's sub task. Must one of 
 
 #### Why not use Redux or React local state?
 
-**For demo, I think React state and context is enough and suitable for small project.**
+**For demo, I think React Context and state is enough and suitable for small project.**
 
 However if the project is a real task on work, I will choose to use Redux or Apollo Client. Redux is a good state management library for complex application, and so does Apollo Client. The difference is Apollo Client enables you to manage both local and remote data with GraphQL.
 
 In most scenerio, we have backend, which means data is from remote. I prefer using GraphQL to manage remote data since it lets frontend and backend works more closer. Moreover, Apollo Client can automatically combines both remote data and local data, caching and updating UI.
 
 Therefore, I choose using Apollo Client.
+
+#### Why use Api mocking?
+
+As before saying, it is is a real task assigned to a team on REAL WORK.
+
+Api mocking is important on frontend because backend is not always ready before us.
+
+If we have api mocking, we can really simulate what will happen on frontend, it is a little different from local-state-only application.
+
+Moreover, api mocking reduce the time we connect real backend api, improving the whole application development time.
+
+Another thing is I want to show that "how I work and what I do on work" as much as possible. So I choose to use Api mocking for simulating remote data, and showing how I solved the problems.
+
+#### Something about new Apollo v3 api Reactive variables.
+
+I think Reactive Variables is just like React Context. The different thing is Reactive Variables is controlled by Apollo and storing outside.
+
+I use Reactive Variables instead of React Context because I prefer to make project more consistent, which means use apollo system as much as possible.
+
+#### Something about flash screen issue?
+
+- [Task description here](https://www.notion.so/mengtse/Sometimes-flash-screen-when-click-another-note-0dccfaa8d55f40d9aa63856460153173)
+
+As description on discussion, it performs because remote data returning too fast.
+
+I know we have some ways to improve and avoid, but it might not happen when backend really ready.
+
+Although I can extend waiting time on worker response for simulating and adjust UI for controlling loading, I think it is not the most important thing in this DEMO project.
+
+(i will improve it if I have more time, but I choose to explain here because the time limitation in my mind is very close.)
+
+#### Conclusion: after finishing all tasks
+
+Here is my conclusion, "Thanks you all, and giving me a good test."
+
+I like this demo project because
+
+1. Specification is very clear.
+2. A suitable difficulty(middle).
+3. Having a good space for letting interviewers to perform themselves.(Styling? Some new and funny features?...)
+
+I know frontend knowledge is huge and I can not perform everything very well. So I need to choose in a limited time.
+(I give myself a time limitation about 2 days work load, which means 10 ~ 16 hours.)
+
+The important thing I focused is simulating like a REAL WORK. It means I need to think like I have a team, and record like teamwork, work like having reviewers.
+
+Here is my work:
+
+1. Styling & Dark Mode
+2. Api mocking with Apollo GraphQL. We can directly connect real backend by replacing endpoint.
+3. Deploy on https://ptoto-note.tsehang.vercel.app
+4. Complete documents: [Task List](https://www.notion.so/mengtse/aeee76b7f9fc4d53af217610231d9bec?v=aa9a7efe74a643dcbe0e000dcad9253e)
+5. [Independent page routing](https://ptoto-note.tsehang.vercel.app/?noteId=f7d398a9-8e66-4965-a1a2-1448b4c6f058)
+
+Finally,thanks for your reading.

@@ -8,8 +8,9 @@ import { useReactiveVar } from '@apollo/client';
 import Editor from './Editor';
 
 type Props = {
-  content: string | null;
+  content: string;
   onChangeContent: (content: string) => void;
+  isSaving?: boolean;
   isLoading?: boolean;
 };
 
@@ -17,14 +18,15 @@ const ContentView: React.FC<Props> = ({
   content,
   onChangeContent,
   isLoading,
+  isSaving,
 }) => {
   const editorMode = useReactiveVar(editorModeVar);
 
-  if (content === null) {
+  if (isLoading) {
     return <div>Loading content...</div>;
   }
 
-  if (isLoading) {
+  if (isSaving) {
     return <div>Saving...</div>;
   }
 

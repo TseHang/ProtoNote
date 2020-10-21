@@ -47,10 +47,18 @@ const Content: React.FC<Props> = ({ note }) => {
   const onEdit = useCallback(() => setEditorMode(EditorMode.Edit), []);
   const onCancel = useCallback(() => {
     if (clearContent !== null) {
-      setEditingContent(clearContent);
-      setEditorMode(EditorMode.View);
+      if (clearContent !== editingContent) {
+        if (
+          confirm('You have a editing content, do you want to discard it ?')
+        ) {
+          setEditingContent(clearContent);
+          setEditorMode(EditorMode.View);
+        }
+      } else {
+        setEditorMode(EditorMode.View);
+      }
     }
-  }, [clearContent]);
+  }, [clearContent, editingContent]);
 
   const [deleteNote] = useMutation<DeleteNote, DeleteNoteVariables>(
     DELETE_NOTE,

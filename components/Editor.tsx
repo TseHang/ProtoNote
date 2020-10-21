@@ -31,7 +31,7 @@ const Editor: React.FC<Props> = ({ content, onChangeContent }) => {
   const [focused, setFocused] = useState<boolean>(false);
 
   useEffect(() => {
-    require('prismjs/themes/prism-coy.css');
+    require('prismjs/themes/prism.css');
   }, []);
 
   return (

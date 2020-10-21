@@ -12,6 +12,7 @@ import {
   UpdateNoteVariables,
 } from '@/typings/gql';
 import { decrypt, encrypt } from '@/utils/security';
+import { media } from '@/utils/theme';
 import { useMutation } from '@apollo/client';
 
 import ContentTopBar from './ContantTopBar';
@@ -25,6 +26,10 @@ const Wrapper = styled.div`
   height: 100%;
   border-left: solid 1px ${p => p.theme.colors.border};
   background: ${p => p.theme.colors.contentBackground};
+
+  ${media('pad')} {
+    width: 100%;
+  }
 `;
 
 type Props = { note: GetNotes_notes };

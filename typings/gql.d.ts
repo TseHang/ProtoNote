@@ -29,6 +29,47 @@ export interface CreateNoteVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL mutation operation: UpdateNote
+// ====================================================
+
+export interface UpdateNote_updateNote {
+  __typename: 'Note';
+  id: string;
+  content: string;
+}
+
+export interface UpdateNote {
+  updateNote: UpdateNote_updateNote;
+}
+
+export interface UpdateNoteVariables {
+  id: string;
+  content: string;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL mutation operation: DeleteNote
+// ====================================================
+
+export interface DeleteNote {
+  deleteNote: boolean;
+}
+
+export interface DeleteNoteVariables {
+  id: string;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL query operation: GetNotes
 // ====================================================
 

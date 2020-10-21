@@ -1,31 +1,39 @@
-import { useEffect, useState } from 'react';
+import React from 'react';
 import ReactMarkdown from 'react-markdown';
 
 import { EditorMode } from '@/constants';
-import { decrypt } from '@/utils/security';
+import { editorModeVar } from '@/gql/editorModeCache';
+import { useReactiveVar } from '@apollo/client';
 
 import Editor from './Editor';
 
-type Props = { content: string; mode: EditorMode };
+type Props = {
+  content: string | null;
+  onChangeContent: (content: string) => void;
+  isLoading?: boolean;
+};
 
-const ContentView: React.FC<Props> = ({ content, mode }) => {
-  const [clearContent, setClearContent] = useState<string | null>(null);
+const ContentView: React.FC<Props> = ({
+  content,
+  onChangeContent,
+  isLoading,
+}) => {
+  const editorMode = useReactiveVar(editorModeVar);
 
-  useEffect(() => {
-    async function decryptContent() {
-      setClearContent(await decrypt(content));
-    }
-    decryptContent();
-  }, [content]);
-
-  if (!clearContent) {
-    return <div>Loading...</div>;
+  if (content === null) {
+    return <div>Loading content...</div>;
   }
 
-  return mode === EditorMode.View ? (
-    <ReactMarkdown>{clearContent}</ReactMarkdown>
+  if (isLoading) {
+    return <div>Saving...</div>;
+  }
+
+  return editorMode === EditorMode.View ? (
+    <ReactMarkdown>
+      {content === '' ? '*<empty content...>*' : content}
+    </ReactMarkdown>
   ) : (
-    <Editor content={clearContent} />
+    <Editor content={content} onChangeContent={onChangeContent} />
   );
 };
 

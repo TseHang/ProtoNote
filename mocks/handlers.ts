@@ -20,11 +20,11 @@ export const handlers = [
       __typename: 'Note',
       id: uuidv4(),
       name,
-      content: 'encrypt:# Hello, *new world*!',
+      content: 'encrypt:',
       createdAt: new Date().getTime(),
     };
     notes.push(newNote);
-    return res(ctx.data({ note: newNote }));
+    return res(ctx.data({ createNote: newNote }));
   }),
 
   graphql.mutation('UpdateNote', (req, res, ctx) => {
@@ -42,7 +42,7 @@ export const handlers = [
     }
 
     notes[idx].content = content; // update note
-    return res(ctx.data({ note: notes[idx] }));
+    return res(ctx.data({ updateNote: notes[idx] }));
   }),
 
   graphql.mutation('DeleteNote', (req, res, ctx) => {
@@ -58,8 +58,7 @@ export const handlers = [
         ]),
       );
     }
-
     notes.splice(idx, 1); // delete note
-    return res(ctx.data(true));
+    return res(ctx.data({ deleteNote: true }));
   }),
 ];

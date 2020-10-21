@@ -3,6 +3,8 @@ import { BiEditAlt, BiSave, BiTrash, BiX } from 'react-icons/bi';
 import styled from 'styled-components';
 
 import { EditorMode } from '@/constants';
+import { editorModeVar } from '@/gql/editorModeCache';
+import { useReactiveVar } from '@apollo/client';
 
 import ContentIcon from './ContentIcon';
 
@@ -20,44 +22,45 @@ const SaveIcon = styled(ContentIcon)`
 `;
 
 type Props = {
-  mode: EditorMode;
   onEdit: () => void;
   onSave: () => void;
   onCancel: () => void;
   onDelete: () => void;
+  isLoading?: boolean;
 };
 
 const ContentBottomBar: React.FC<Props> = ({
-  mode,
   onDelete,
   onSave,
   onEdit,
   onCancel,
+  isLoading,
 }) => {
+  const editorMode = useReactiveVar(editorModeVar);
   return (
-    <Wrapper mode={mode}>
-      {mode === EditorMode.View ? (
+    <Wrapper mode={editorMode}>
+      {editorMode === EditorMode.View ? (
         <ContentIcon
           icon={<BiEditAlt size="30px" />}
           name="Edit"
-          onClick={onEdit}
+          onClick={isLoading ? undefined : onEdit}
         />
       ) : (
         <>
           <ContentIcon
             icon={<BiX size="30px" />}
             name="Cancel"
-            onClick={onCancel}
+            onClick={isLoading ? undefined : onCancel}
           />
           <SaveIcon
             icon={<BiSave size="30px" />}
             name="Save"
-            onClick={onSave}
+            onClick={isLoading ? undefined : onSave}
           />
           <ContentIcon
             icon={<BiTrash size="30px" />}
             name="Delete"
-            onClick={onDelete}
+            onClick={isLoading ? undefined : onDelete}
           />
         </>
       )}
@@ -65,4 +68,4 @@ const ContentBottomBar: React.FC<Props> = ({
   );
 };
 
-export default ContentBottomBar;
+export default React.memo(ContentBottomBar);

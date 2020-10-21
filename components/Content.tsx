@@ -31,18 +31,34 @@ type Props = { note: GetNotes_notes };
 
 const Content: React.FC<Props> = ({ note }) => {
   const [clearContent, setClearContent] = useState<string | null>(null);
+  const [editingContent, setEditingContent] = useState<string>('');
   const [isEncrypting, setIsEncrypting] = useState<boolean>(false);
 
   // decrypt dirty content
   useEffect(() => {
     async function decryptContent() {
-      setClearContent(await decrypt(note.content));
+      const decryptedContent = await decrypt(note.content);
+      setClearContent(decryptedContent);
+      setEditingContent(decryptedContent);
     }
     decryptContent();
   }, [note.content]);
 
   const onEdit = useCallback(() => setEditorMode(EditorMode.Edit), []);
-  const onCancel = useCallback(() => setEditorMode(EditorMode.View), []);
+  const onCancel = useCallback(() => {
+    if (clearContent !== null) {
+      if (clearContent !== editingContent) {
+        if (
+          confirm('You have a editing content, do you want to discard it ?')
+        ) {
+          setEditingContent(clearContent);
+          setEditorMode(EditorMode.View);
+        }
+      } else {
+        setEditorMode(EditorMode.View);
+      }
+    }
+  }, [clearContent, editingContent]);
 
   const [deleteNote] = useMutation<DeleteNote, DeleteNoteVariables>(
     DELETE_NOTE,
@@ -70,27 +86,27 @@ const Content: React.FC<Props> = ({ note }) => {
   const [updateNote, { loading }] = useMutation<
     UpdateNote,
     UpdateNoteVariables
-  >(UPDATE_NOTE);
+  >(UPDATE_NOTE, { onCompleted: () => setEditorMode(EditorMode.View) });
 
   const onSave = useCallback(async () => {
     if (clearContent !== null) {
       // encrypt clear data to dirty format
       setIsEncrypting(true);
-      const encryptedContent = await encrypt(clearContent);
+      const encryptedContent = await encrypt(editingContent);
       updateNote({
         variables: { id: note.id, content: encryptedContent },
       });
       setIsEncrypting(false);
     }
-  }, [updateNote, clearContent]);
+  }, [updateNote, editingContent]);
 
   return (
     <Wrapper>
       <ContentTopBar name={note.name} />
       <div style={{ flex: 1, padding: '.5em', overflowY: 'scroll' }}>
         <ContentView
-          content={clearContent}
-          onChangeContent={setClearContent}
+          content={editingContent}
+          onChangeContent={setEditingContent}
           isLoading={loading || isEncrypting}
         />
       </div>

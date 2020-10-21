@@ -12,8 +12,9 @@ const Wrapper = styled.div<{ mode: EditorMode }>`
   display: flex;
   justify-content: ${p =>
     p.mode === EditorMode.View ? 'flex-end' : 'space-between'};
-  border-top: solid 3px;
+  border-top: solid 3px ${p => p.theme.colors.border};
   padding: 0.5em 1em;
+  background-color: ${p => p.theme.colors.bg};
 `;
 
 const SaveIcon = styled(ContentIcon)`

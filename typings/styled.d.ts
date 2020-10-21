@@ -7,10 +7,14 @@ declare module 'styled-components' {
     borderRadius: string;
 
     colors: {
+      documentColor: string;
       main: string;
       lightMain: string;
       secondary: string;
       bg: string;
+      contentBackground: string;
+      border: string;
+      gradient: string;
     };
   }
 }

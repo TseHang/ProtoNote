@@ -16,6 +16,7 @@ const Wrapper = styled.button`
   align-items: center;
   font-size: 0.8rem;
   background: none;
+  color: ${p => p.theme.colors.documentColor};
 
   &:hover {
     color: ${p => (p.disabled ? 'initial' : p.theme.colors.main)};

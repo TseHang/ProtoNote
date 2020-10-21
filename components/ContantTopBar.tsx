@@ -5,7 +5,7 @@ const Title = styled.div`
   display: flex;
   justify-content: space-between;
   padding: 0.5em 1em;
-  border-bottom: solid 3px;
+  border-bottom: solid 3px ${p => p.theme.colors.border};
   font-weight: bold;
   font-size: 1.2em;
   background: ${p => p.theme.colors.lightMain};

@@ -1,7 +1,9 @@
 import { createGlobalStyle } from 'styled-components';
 import { normalize } from 'styled-normalize';
 
-export default createGlobalStyle`
+import { ColorMode } from '@/constants';
+
+export default createGlobalStyle<{ colorMode: ColorMode }>`
   ${normalize}
 
   * {
@@ -13,7 +15,7 @@ export default createGlobalStyle`
   #__next {
     width: 100vw;
     height: 100vh;
-    color: #333333;
+    color: ${p => p.theme.colors.documentColor};
   }
 
   /*

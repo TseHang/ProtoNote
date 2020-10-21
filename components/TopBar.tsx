@@ -9,12 +9,16 @@ import { GET_NOTES } from '@/gql/queries';
 import { CreateNote, CreateNoteVariables } from '@/typings/gql';
 import { useMutation, useReactiveVar } from '@apollo/client';
 
+import ToggleTheme from './ToggleTheme';
+
 const Wrapper = styled.div`
   display: flex;
+  justify-content: space-between;
   align-items: center;
   height: ${TOPBAR_HEIGHT};
-  border-bottom: solid 2px;
+  border-bottom: solid 2px ${p => p.theme.colors.border};
   padding: 0 2em;
+  background-color: ${p => p.theme.colors.contentBackground};
 `;
 
 const Button = styled.button`
@@ -48,6 +52,7 @@ const TopBar: React.FC = () => {
         <BiPlusMedical size="20px" style={{ marginRight: '10px' }} />
         New note
       </Button>
+      <ToggleTheme />
     </Wrapper>
   );
 };

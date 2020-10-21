@@ -15,6 +15,7 @@ const Item = styled.a`
   height: 50px;
   align-items: center;
   text-decoration: none;
+  background-color: ${p => p.theme.colors.contentBackground};
 
   &:hover {
     cursor: pointer;

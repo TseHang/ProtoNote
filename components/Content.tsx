@@ -23,8 +23,8 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   height: 100%;
-  border-left: solid 1px;
-  background: white;
+  border-left: solid 1px ${p => p.theme.colors.border};
+  background: ${p => p.theme.colors.contentBackground};
 `;
 
 type Props = { note: GetNotes_notes };

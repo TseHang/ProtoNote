@@ -6,11 +6,11 @@ export function createApolloClient() {
     ssrMode: isServer,
     cache: new InMemoryCache(),
     link: new HttpLink({
-      uri: 'http://localhost:3000/graphql',
+      uri: '...',
       // Use explicit `window.fetch` so tha outgoing requests
       // are captured and deferred until the Service Worker is ready.
       // @ts-ignore
       fetch: (...args) => fetch(...args),
-    })
+    }),
   });
 }

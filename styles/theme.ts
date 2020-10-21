@@ -1,4 +1,4 @@
-import { DefaultTheme } from 'styled-components'
+import { DefaultTheme } from 'styled-components';
 
 export const colors = {
   primary: {
@@ -36,16 +36,35 @@ export const colors = {
     200: '#E2E8F0',
     500: '#718096',
     600: '#4A5568',
-  }
-}
+  },
+};
 
 export const theme: DefaultTheme = {
   borderRadius: '5px',
 
   colors: {
+    documentColor: '#333333',
     main: colors.primary[500],
     lightMain: colors.primary[100],
     secondary: colors.secondary[500],
     bg: colors.gray[100],
+    contentBackground: '#ffffff',
+    border: colors.gray[600],
+    gradient: 'linear-gradient(#39598A, #79D7ED)',
   },
-}
+};
+
+export const darkTheme: DefaultTheme = {
+  borderRadius: '5px',
+
+  colors: {
+    documentColor: '#ffffff',
+    main: colors.primary[500],
+    lightMain: '#23282d',
+    secondary: colors.secondary[500],
+    bg: '#121212',
+    contentBackground: '#28232d',
+    border: colors.gray[600],
+    gradient: 'linear-gradient(#091236, #1E215D)',
+  },
+};

@@ -26,6 +26,7 @@ type Props = {
   onSave: () => void;
   onCancel: () => void;
   onDelete: () => void;
+  isLoading?: boolean;
 };
 
 const ContentBottomBar: React.FC<Props> = ({
@@ -33,6 +34,7 @@ const ContentBottomBar: React.FC<Props> = ({
   onSave,
   onEdit,
   onCancel,
+  isLoading,
 }) => {
   const editorMode = useReactiveVar(editorModeVar);
   return (
@@ -41,24 +43,24 @@ const ContentBottomBar: React.FC<Props> = ({
         <ContentIcon
           icon={<BiEditAlt size="30px" />}
           name="Edit"
-          onClick={onEdit}
+          onClick={isLoading ? undefined : onEdit}
         />
       ) : (
         <>
           <ContentIcon
             icon={<BiX size="30px" />}
             name="Cancel"
-            onClick={onCancel}
+            onClick={isLoading ? undefined : onCancel}
           />
           <SaveIcon
             icon={<BiSave size="30px" />}
             name="Save"
-            onClick={onSave}
+            onClick={isLoading ? undefined : onSave}
           />
           <ContentIcon
             icon={<BiTrash size="30px" />}
             name="Delete"
-            onClick={onDelete}
+            onClick={isLoading ? undefined : onDelete}
           />
         </>
       )}

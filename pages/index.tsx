@@ -11,8 +11,11 @@ import { GetNote, GetNoteVariables, GetNotes } from '@/typings/gql';
 import { useQuery } from '@apollo/client';
 
 const App = () => {
-  const parsed = queryString.parse(location.search);
-  const noteId = parsed.noteId as string;
+  let noteId: string = '';
+  if (process.browser) {
+    const parsed = queryString.parse(location.search);
+    noteId = parsed.noteId as string;
+  }
 
   const { data: notesData } = useQuery<GetNotes>(GET_NOTES);
   const { data: noteData } = useQuery<GetNote, GetNoteVariables>(GET_NOTE, {

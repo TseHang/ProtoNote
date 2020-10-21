@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { Note, notes } from './fakeData';
 
 export const handlers = [
-  graphql.query('GetNotes', (req, res, ctx) => {
+  graphql.query('GetNotes', (_, res, ctx) => {
     return res(ctx.data({ notes }));
   }),
 

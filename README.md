@@ -67,6 +67,7 @@ In real work scenerio, we usually use another application for task tracking and 
 | 10/18 | 110        | [layout UI](https://github.com/TseHang/PtotoNote/pull/3)                                                                                                |
 | 10/20 | 90         | [api mocking](https://github.com/TseHang/PtotoNote/pull/4)                                                                                              |
 | 10/20 | 120        | [view mode](https://github.com/TseHang/PtotoNote/pull/5)                                                                                                |
+| 10/21 | 100        | [edit mode](https://github.com/TseHang/PtotoNote/pull/6)                                                                                                |
 
 ## Futhermore...
 

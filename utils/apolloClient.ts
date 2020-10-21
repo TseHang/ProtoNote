@@ -6,6 +6,7 @@ export function createApolloClient() {
     ssrMode: isServer,
     cache: new InMemoryCache(),
     link: new HttpLink({
+      // change when production
       uri: '...',
       // Use explicit `window.fetch` so tha outgoing requests
       // are captured and deferred until the Service Worker is ready.

@@ -7,7 +7,7 @@ import { editorModeVar } from '@/gql/editorModeCache';
 import { GetNotes_notes } from '@/typings/gql';
 import { useReactiveVar } from '@apollo/client';
 
-const Item = styled.a`
+const Item = styled.a<{ isActive: boolean; isEditMode: boolean }>`
   display: flex;
   margin: 0.5rem 1rem;
   padding: 0.5rem 1rem;
@@ -15,10 +15,11 @@ const Item = styled.a`
   height: 50px;
   align-items: center;
   text-decoration: none;
-  background-color: ${p => p.theme.colors.contentBackground};
+  cursor: ${p => (p.isEditMode ? 'default' : 'pointer')};
+  background-color: ${p =>
+    p.isActive ? p.theme.colors.lightMain : p.theme.colors.contentBackground};
 
   &:hover {
-    cursor: pointer;
     background-color: ${p => p.theme.colors.lightMain};
   }
 
@@ -32,6 +33,7 @@ const Item = styled.a`
 `;
 
 type Props = {
+  focusedNoteId?: string;
   notes: GetNotes_notes[];
 };
 
@@ -46,7 +48,7 @@ const LinkWrapper: React.FC<React.PropsWithChildren<LinkProps>> = ({
   </Link>
 );
 
-const NotesList: React.FC<Props> = ({ notes }) => {
+const NotesList: React.FC<Props> = ({ focusedNoteId, notes }) => {
   const editorMode = useReactiveVar(editorModeVar);
   const isEditorEditMode = editorMode === EditorMode.Edit;
   const ItemWrapper = isEditorEditMode ? EmptyWrapper : LinkWrapper;
@@ -54,7 +56,10 @@ const NotesList: React.FC<Props> = ({ notes }) => {
     <div style={{ flex: 1, overflow: 'scroll' }}>
       {notes.map(note => (
         <ItemWrapper key={note.id} href={`/?noteId=${note.id}`} passHref>
-          <Item style={{ cursor: isEditorEditMode ? 'default' : 'pointer' }}>
+          <Item
+            isActive={focusedNoteId === note.id}
+            isEditMode={isEditorEditMode}
+          >
             <p>{note.name}</p>
           </Item>
         </ItemWrapper>

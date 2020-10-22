@@ -16,21 +16,23 @@ const App = () => {
     const parsed = queryString.parse(location.search);
     noteId = parsed.noteId as string;
   }
-
   const { data: notesData } = useQuery<GetNotes>(GET_NOTES);
   const { data: noteData } = useQuery<GetNote, GetNoteVariables>(GET_NOTE, {
     variables: { id: noteId },
     skip: !noteId,
   });
 
-  // if noteData changed, alway back to View mode first.
+  // if noteId exist but noteData is not found,
+  // the note might be deleted, back to view mode first.
   useEffect(() => {
-    setEditorMode(EditorMode.View);
+    if (noteData?.note === null) {
+      setEditorMode(EditorMode.View);
+    }
   }, [noteData?.note]);
 
   return (
     <AppLayout>
-      <NotesList notes={notesData?.notes || []} />
+      <NotesList focusedNoteId={noteId} notes={notesData?.notes || []} />
       {noteData?.note && noteId && (
         /* key for re-mount when noteId changed */
         <Content key={noteId} note={noteData.note} />

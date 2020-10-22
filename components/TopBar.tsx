@@ -8,6 +8,7 @@ import { editorModeVar, setEditorMode } from '@/gql/editorModeCache';
 import { NoteFragments } from '@/gql/fragments';
 import { CREATE_NOTE } from '@/gql/mutation';
 import { CreateNote, CreateNoteVariables } from '@/typings/gql';
+import { media } from '@/utils/theme';
 import { useMutation, useReactiveVar } from '@apollo/client';
 
 import ToggleTheme from './ToggleTheme';
@@ -33,6 +34,19 @@ const Button = styled.button`
   font-size: 1.2rem;
   background: ${p => p.theme.colors.main};
   cursor: ${p => (p.disabled ? 'not-allowed' : 'pointer')};
+
+  ${media('pad')} {
+    width: 50%;
+    font-size: 1rem;
+    padding: 0.5rem;
+  }
+`;
+
+const StyledPlus = styled(BiPlusMedical)`
+  margin-right: 10px;
+  ${media('pad')} {
+    margin-right: 5px;
+  }
 `;
 
 const TopBar: React.FC = () => {
@@ -70,7 +84,7 @@ const TopBar: React.FC = () => {
         onClick={() => createNote()}
         disabled={editorMode === EditorMode.Edit}
       >
-        <BiPlusMedical size="20px" style={{ marginRight: '10px' }} />
+        <StyledPlus size="20px" />
         New note
       </Button>
       <ToggleTheme />

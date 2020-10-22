@@ -28,7 +28,7 @@ export const handlers = [
   }),
 
   graphql.mutation('UpdateNote', (req, res, ctx) => {
-    const { id, content } = req.variables;
+    const { id, content, name } = req.variables;
     const idx = notes.findIndex(n => n.id === id);
     if (idx < 0) {
       return res(
@@ -40,8 +40,12 @@ export const handlers = [
         ]),
       );
     }
-
-    notes[idx].content = content; // update note
+    if (content) {
+      notes[idx].content = content; // update note
+    }
+    if (name) {
+      notes[idx].name = name; // update name
+    }
     return res(ctx.data({ updateNote: notes[idx] }));
   }),
 

@@ -107,7 +107,7 @@ const Content: React.FC<Props> = ({ note }) => {
       });
       setIsEncrypting(false);
     }
-  }, [updateNote, editingContent]);
+  }, [updateNote, editingContent, editingName]);
 
   return (
     <Wrapper>

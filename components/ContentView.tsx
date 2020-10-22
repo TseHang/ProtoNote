@@ -39,4 +39,4 @@ const ContentView: React.FC<Props> = ({
   );
 };
 
-export default ContentView;
+export default React.memo(ContentView);

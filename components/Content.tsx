@@ -36,6 +36,7 @@ type Props = { note: GetNotes_notes };
 
 const Content: React.FC<Props> = ({ note }) => {
   const [clearContent, setClearContent] = useState<string | null>(null);
+  const [editingName, setEditingName] = useState(note.name);
   const [editingContent, setEditingContent] = useState<string>('');
   const [isEncrypting, setIsEncrypting] = useState<boolean>(false);
 
@@ -52,18 +53,17 @@ const Content: React.FC<Props> = ({ note }) => {
   const onEdit = useCallback(() => setEditorMode(EditorMode.Edit), []);
   const onCancel = useCallback(() => {
     if (clearContent !== null) {
-      if (clearContent !== editingContent) {
-        if (
-          confirm('You have a editing content, do you want to discard it ?')
-        ) {
+      if (clearContent !== editingContent || editingName !== note.name) {
+        if (confirm('You have edited, do you want to discard it ?')) {
           setEditingContent(clearContent);
+          setEditingName(note.name);
           setEditorMode(EditorMode.View);
         }
       } else {
         setEditorMode(EditorMode.View);
       }
     }
-  }, [clearContent, editingContent]);
+  }, [clearContent, editingContent, editingName]);
 
   const [deleteNote] = useMutation<DeleteNote, DeleteNoteVariables>(
     DELETE_NOTE,
@@ -95,19 +95,27 @@ const Content: React.FC<Props> = ({ note }) => {
 
   const onSave = useCallback(async () => {
     if (clearContent !== null) {
-      // encrypt clear data to dirty format
-      setIsEncrypting(true);
-      const encryptedContent = await encrypt(editingContent);
-      updateNote({
-        variables: { id: note.id, content: encryptedContent },
-      });
-      setIsEncrypting(false);
+      if (!editingName) {
+        alert('Name can not be empty!');
+      } else {
+        // encrypt clear data to dirty format
+        setIsEncrypting(true);
+        const encryptedContent = await encrypt(editingContent);
+        updateNote({
+          variables: {
+            id: note.id,
+            name: editingName,
+            content: encryptedContent,
+          },
+        });
+        setIsEncrypting(false);
+      }
     }
-  }, [updateNote, editingContent]);
+  }, [updateNote, editingContent, editingName]);
 
   return (
     <Wrapper>
-      <ContentTopBar name={note.name} />
+      <ContentTopBar name={editingName} onChangeName={setEditingName} />
       <div style={{ flex: 1, padding: '.5em', overflowY: 'scroll' }}>
         <ContentView
           content={editingContent}

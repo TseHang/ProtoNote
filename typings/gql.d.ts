@@ -35,6 +35,7 @@ export interface CreateNoteVariables {
 export interface UpdateNote_updateNote {
   __typename: 'Note';
   id: string;
+  name: string;
   content: string;
 }
 
@@ -44,7 +45,8 @@ export interface UpdateNote {
 
 export interface UpdateNoteVariables {
   id: string;
-  content: string;
+  name?: string | null;
+  content?: string | null;
 }
 
 /* tslint:disable */
@@ -108,6 +110,23 @@ export interface GetNote {
 
 export interface GetNoteVariables {
   id: string;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL fragment: NewNote
+// ====================================================
+
+export interface NewNote {
+  __typename: 'Note';
+  id: string;
+  name: string;
+  content: string;
+  createdAt: any;
 }
 
 /* tslint:disable */

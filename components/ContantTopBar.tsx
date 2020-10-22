@@ -1,11 +1,12 @@
 import Link from 'next/link';
-import React from 'react';
-import { BiX } from 'react-icons/bi';
+import React, { useState } from 'react';
+import { BiPencil, BiX } from 'react-icons/bi';
 import styled from 'styled-components';
 
 import { EditorMode } from '@/constants';
 import { editorModeVar } from '@/gql/editorModeCache';
 import { colors } from '@/styles/theme';
+import { media } from '@/utils/theme';
 import { useReactiveVar } from '@apollo/client';
 
 const Title = styled.div`
@@ -28,13 +29,39 @@ const StyledButton = styled.button`
   cursor: ${p => (p.disabled ? 'not-allowed' : 'pointer')};
 `;
 
-type Props = { name: string };
+const StyledInput = styled.input<{ isFocus?: boolean }>`
+  margin-left: 5px;
+  margin-right: auto;
+  color: ${p => p.theme.colors.documentColor};
+  border-bottom: ${p =>
+    p.isFocus ? `solid 1.5px ${p.theme.colors.main}` : 'none'};
+  width: 60%;
+  ${media('pad')} {
+    width: 80%;
+  }
+`;
 
-const ContentTopBar: React.FC<Props> = ({ name }) => {
+type Props = { name: string; onChangeName: (name: string) => void };
+
+const ContentTopBar: React.FC<Props> = ({ name, onChangeName }) => {
   const editorMode = useReactiveVar(editorModeVar);
+  const [focused, setFocused] = useState(false);
+
+  const isEditMode = editorMode === EditorMode.Edit;
   return (
     <Title>
-      <p>{name}</p>
+      {isEditMode && <BiPencil size="20px" />}
+      {isEditMode ? (
+        <StyledInput
+          isFocus={focused}
+          onFocus={() => setFocused(true)}
+          onBlur={() => setFocused(false)}
+          value={name}
+          onChange={e => onChangeName(e.target.value)}
+        />
+      ) : (
+        <p>{name}</p>
+      )}
       <Link href="/">
         <StyledButton disabled={editorMode === EditorMode.Edit}>
           <BiX size="30px" />

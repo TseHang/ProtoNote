@@ -95,17 +95,21 @@ const Content: React.FC<Props> = ({ note }) => {
 
   const onSave = useCallback(async () => {
     if (clearContent !== null) {
-      // encrypt clear data to dirty format
-      setIsEncrypting(true);
-      const encryptedContent = await encrypt(editingContent);
-      updateNote({
-        variables: {
-          id: note.id,
-          name: editingName,
-          content: encryptedContent,
-        },
-      });
-      setIsEncrypting(false);
+      if (!editingName) {
+        alert('Name can not be empty!');
+      } else {
+        // encrypt clear data to dirty format
+        setIsEncrypting(true);
+        const encryptedContent = await encrypt(editingContent);
+        updateNote({
+          variables: {
+            id: note.id,
+            name: editingName,
+            content: encryptedContent,
+          },
+        });
+        setIsEncrypting(false);
+      }
     }
   }, [updateNote, editingContent, editingName]);
 

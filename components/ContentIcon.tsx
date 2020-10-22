@@ -9,7 +9,7 @@ type Props = {
 };
 
 const Wrapper = styled.button`
-  cursor: pointer;
+  cursor: ${p => (p.disabled ? 'default' : 'pointer')};
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -19,7 +19,7 @@ const Wrapper = styled.button`
   color: ${p => p.theme.colors.documentColor};
 
   &:hover {
-    color: ${p => (p.disabled ? 'initial' : p.theme.colors.main)};
+    color: ${p => (p.disabled ? 'inherit' : p.theme.colors.main)};
   }
 `;
 

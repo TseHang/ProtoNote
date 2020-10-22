@@ -1,11 +1,12 @@
+import { useRouter } from 'next/dist/client/router';
 import React from 'react';
 import { BiPlusMedical } from 'react-icons/bi';
 import styled from 'styled-components';
 
 import { EditorMode, TOPBAR_HEIGHT } from '@/constants';
-import { editorModeVar } from '@/gql/editorModeCache';
+import { editorModeVar, setEditorMode } from '@/gql/editorModeCache';
+import { NoteFragments } from '@/gql/fragments';
 import { CREATE_NOTE } from '@/gql/mutation';
-import { GET_NOTES } from '@/gql/queries';
 import { CreateNote, CreateNoteVariables } from '@/typings/gql';
 import { useMutation, useReactiveVar } from '@apollo/client';
 
@@ -35,12 +36,32 @@ const Button = styled.button`
 `;
 
 const TopBar: React.FC = () => {
+  const { push } = useRouter();
   const editorMode = useReactiveVar(editorModeVar);
   const [createNote] = useMutation<CreateNote, CreateNoteVariables>(
     CREATE_NOTE,
     {
       variables: { name: 'NEW NOTE!!!' },
-      refetchQueries: [{ query: GET_NOTES }],
+      update: (cache, res) => {
+        if (res.data?.createNote) {
+          const newNote = res.data.createNote;
+          cache.modify({
+            fields: {
+              notes(existingRefs = []) {
+                const newNoteRef = cache.writeFragment({
+                  data: newNote,
+                  fragment: NoteFragments.newNote,
+                });
+                return [...existingRefs, newNoteRef];
+              },
+            },
+          });
+        }
+      },
+      onCompleted: data => {
+        push(`/?noteId=${data.createNote.id}`);
+        setEditorMode(EditorMode.Edit);
+      },
     },
   );
   return (

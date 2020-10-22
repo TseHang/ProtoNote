@@ -32,7 +32,7 @@ const App = () => {
 
   return (
     <AppLayout>
-      <NotesList notes={notesData?.notes || []} />
+      <NotesList focusedNoteId={noteId} notes={notesData?.notes || []} />
       {noteData?.note && noteId && (
         /* key for re-mount when noteId changed */
         <Content key={noteId} note={noteData.note} />
